@@ -12,7 +12,7 @@
 
     {{ post.content|md2html }}
 
-    {{ include('blog/_post_tags.html.twig') }}
+    {#{ include('blog/_post_tags.html.twig') }#}
 
     <div id="post-add-comment" class="well">
         {# The 'IS_AUTHENTICATED_FULLY' role ensures that the user has entered
@@ -38,7 +38,7 @@
     </h3>
 
     {% for comment in post.comments %}
-        <div class="row post-comment">
+        <div class="row post-comment {{ cycle(['bg-light', ''], loop.index0) }}">
             <a name="comment_{{ comment.id }}"></a>
             <h4 class="col-sm-3">
                 <strong>{{ comment.author.fullName }}</strong> {{ 'post.commented_on'|trans }}
@@ -71,7 +71,4 @@
       ('base.html.twig') for this block ('sidebar'). This is a very convenient way
       to share common contents in different templates #}
     {{ parent() }}
-
-    {{ show_source_code(_self) }}
-    {{ include('blog/_rss.html.twig') }}
 {% endblock %}
